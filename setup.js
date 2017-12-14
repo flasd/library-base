@@ -39,7 +39,7 @@ fs.unlinkSync('./package-lock.json');
 fs.unlinkSync('./README.md');
 fs.unlinkSync('./LICENSE');
 
-fs.writeFileSync('./README.md', '# your_library\n Here goes your library description!', 'utf8');
+fs.writeFileSync('./README.md', '# your_library\n Here goes your library description!\n\0', 'utf8');
 
 childProcess.spawnSync('git', ['init'], { stdio: 'inherit' });
 childProcess.spawnSync('npm', ['init'], { stdio: 'inherit' });
