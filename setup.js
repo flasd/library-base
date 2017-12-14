@@ -1,6 +1,8 @@
 const childProcess = require('child_process');
 const fs = require('fs');
 
+const rm = require('./.rimraf');
+
 const devDependencies = [
     'babel-cli',
     'babel-core',
@@ -17,11 +19,9 @@ const devDependencies = [
     'webpack',
 ];
 
-fs.rmdirSync('./.git');
-fs.unlinkSync('./package.json');
-fs.unlinkSync('./package-lock.json');
-fs.unlinkSync('./README.md');
-fs.unlinkSync('./LICENSE');
+rm('.git package.json package-lock.json README.md LICENSE');
+fs.unlinkSync('./.glob.js');
+fs.unlinkSync('./.rimraf.js');
 
 fs.writeFileSync('./README.md', '# your_library\n Here goes your library description!', './README.md');
 
