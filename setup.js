@@ -17,7 +17,7 @@ const devDependencies = [
     'webpack',
 ];
 
-fs.unlinkSync('./.git');
+fs.rmdirSync('./.git');
 fs.unlinkSync('./package.json');
 fs.unlinkSync('./package-lock.json');
 fs.unlinkSync('./README.md');
