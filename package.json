@@ -1,0 +1,42 @@
+{
+  "name": "library-base",
+  "version": "0.0.1-alpha.1",
+  "description": "Webpack base for developing libraries",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "cross-env NODE_ENV=test eslint src/**/*.js",
+    "test": "cross-env NODE_ENV=test nyc -x src/**/*.test.js mocha src/**/*.test.js --require babel-core/register",
+    "build": "npm test && npm run lint && cross-env NODE_ENV=production webpack",
+    "report": "nyc report -x ./src/index.spec.js --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/flasd/library-base.git"
+  },
+  "keywords": [
+    "webpack",
+    "library",
+    "boilerplate"
+  ],
+  "author": "Marcel de Oliveira Coelho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flasd/library-base/issues"
+  },
+  "homepage": "https://github.com/flasd/library-base#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.1.1",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^4.0.1",
+    "nyc": "^11.3.0",
+    "webpack": "^3.10.0"
+  }
+}
