@@ -19,21 +19,17 @@ const devDependencies = [
 
 function rm(path) {
     if (fs.existsSync(path)) {
-        if (fs.lstatSync(path).isDirectory) {
-            fs.readdirSync(path).forEach((file) => {
-                const currPath = `${path}/${file}`;
+        fs.readdirSync(path).forEach((file) => {
+            const realPath = `${path}/${file}`;
 
-                if (fs.lstatSync(currPath).isDirectory) {
-                    rm(currPath);
-                } else {
-                    fs.unlinkSync(currPath);
-                }
-            });
+            if (fs.lstatSync(realPath).isDirectory()) {
+                rm(realPath);
+            } else {
+                fs.unlinkSync(realPath);
+            }
+        });
 
-            fs.rmdirSync(path);
-        } else {
-            fs.unlinkSync(path);
-        }
+        fs.rmdirSync(path);
     }
 }
 
