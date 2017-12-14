@@ -1,8 +1,6 @@
 const childProcess = require('child_process');
 const fs = require('fs');
 
-const rm = require('./.rimraf');
-
 const devDependencies = [
     'babel-cli',
     'babel-core',
@@ -19,9 +17,27 @@ const devDependencies = [
     'webpack',
 ];
 
-rm('.git package.json package-lock.json README.md LICENSE');
-fs.unlinkSync('./.glob.js');
-fs.unlinkSync('./.rimraf.js');
+function rm(path) {
+    if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach((file) => {
+            const realPath = `${path}/${file}`;
+
+            if (fs.lstatSync(realPath).isDirectory) {
+                rm(realPath);
+            } else {
+                fs.unlinkSync(realPath);
+            }
+        });
+
+        fs.rmdirSync(path);
+    }
+}
+
+rm('./.git');
+fs.unlinkSync('package.json');
+fs.unlinkSync('package-lock.json');
+fs.unlinkSync('README.md');
+fs.unlinkSync('LICENSE');
 
 fs.writeFileSync('./README.md', '# your_library\n Here goes your library description!', './README.md');
 
