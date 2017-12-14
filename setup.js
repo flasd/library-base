@@ -52,4 +52,6 @@ childProcess.spawnSync('npm', ['init'], { stdio: 'inherit', detached: true });
 process.stdout.write('\n');
 
 const installArgs = ['install'].concat(devDependencies).concat(['--save-dev']);
-childProcess.spawnSync('npm', installArgs, { stdio: 'inherit' });
+childProcess.spawnSync('npm', installArgs, { stdio: 'inherit', detached: true });
+
+rm('./setup.js');
