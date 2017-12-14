@@ -1,7 +1,7 @@
 # library-base
 Webpack base for developing libraries
 
-[![Build Status](https://travis-ci.org/flasd/library-base.svg?branch=master)](https://travis-ci.org/flasd/library-base) [![Coverage Status](https://coveralls.io/repos/github/flasd/library-base/badge.svg?branch=master)](https://coveralls.io/github/flasd/library-base?branch=master) [![npm version](https://badge.fury.io/js/library-base.svg)](https://www.npmjs.com/package/library-base) [![npm](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/flasd/library-base/blob/master/LICENSE) [![code style](https://img.shields.io/badge/Code%20Style-Airbnb-orange.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
+[![npm](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/flasd/library-base/blob/master/LICENSE) [![code style](https://img.shields.io/badge/Code%20Style-Airbnb-orange.svg)](https://www.npmjs.com/package/eslint-config-airbnb)
 
 ### What does this offer, you ask?
 - ES6, 7, NEXT Support with Babel
