@@ -47,6 +47,9 @@ fs.writeFileSync('./README.md', '# your_library\n Here goes your library descrip
 
 childProcess.spawnSync('git', ['init'], { stdio: 'inherit' });
 process.stdout.write('\n');
-childProcess.spawnSync('npm', ['init'], { stdio: 'inherit' });
+
+childProcess.spawnSync('npm', ['init'], { stdio: 'inherit', detached: true });
 process.stdout.write('\n');
-childProcess.spawnSync('npm', (['install'].concat(devDependencies).concat['--save-dev']), { stdio: 'inherit' });
+
+const installArgs = ['install'].concat(devDependencies).concat(['--save-dev']);
+childProcess.spawnSync('npm', installArgs, { stdio: 'inherit' });
