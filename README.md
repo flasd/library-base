@@ -27,7 +27,7 @@ Setup will:
 ### Usage
 The entry point is the src/index.js file. Go from there.
 
+If you've liked this, consider giving it a :star:!
+
 ### Licence
 MIT all the way. Let's create awesome stuff! :rocket:
-
-If you've liked this, consider giving it a :star:!
