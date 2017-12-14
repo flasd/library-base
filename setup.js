@@ -41,6 +41,6 @@ fs.unlinkSync('./LICENSE');
 
 fs.writeFileSync('./README.md', '# your_library\n Here goes your library description!', 'utf8');
 
-childProcess.execSync('git init');
-childProcess.execSync('npm init');
-childProcess.execSync(`npm install ${devDependencies.join(' ')}`);
+childProcess.spawnSync('git', ['init'], { stdin: 'inherit' });
+childProcess.spawnSync('npm', ['init'], { stdin: 'inherit' });
+childProcess.spawnSync('npm', (['install'].concat(devDependencies).concat['--save-dev']), { stdin: 'inherit' });
