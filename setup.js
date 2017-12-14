@@ -21,7 +21,7 @@ const scripts = {
     lint: 'cross-env NODE_ENV=test eslint src/**/*.js',
     test: 'cross-env NODE_ENV=test nyc -x src/**/*.test.js mocha src/**/*.test.js --require babel-core/register',
     build: 'npm test && npm run lint && cross-env NODE_ENV=production webpack',
-    report: 'nyc report -x ./src/index.spec.js --reporter=text-lcov | coveralls',
+    coverage: 'nyc report --reporter=text-lcov | coveralls',
 };
 
 /**
