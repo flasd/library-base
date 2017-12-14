@@ -34,10 +34,10 @@ function rm(path) {
 }
 
 rm('./.git');
-fs.unlinkSync('package.json');
-fs.unlinkSync('package-lock.json');
-fs.unlinkSync('README.md');
-fs.unlinkSync('LICENSE');
+fs.unlinkSync('./package.json');
+fs.unlinkSync('./package-lock.json');
+fs.unlinkSync('./README.md');
+fs.unlinkSync('./LICENSE');
 
 fs.writeFileSync('./README.md', '# your_library\n Here goes your library description!', './README.md');
 
