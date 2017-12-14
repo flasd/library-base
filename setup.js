@@ -19,28 +19,34 @@ const devDependencies = [
 
 function rm(path) {
     if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach((file) => {
-            const realPath = `${path}/${file}`;
+        if (fs.lstatSync(path).isDirectory()) {
+            fs.readdirSync(path).forEach((file) => {
+                const realPath = `${path}/${file}`;
 
-            if (fs.lstatSync(realPath).isDirectory()) {
-                rm(realPath);
-            } else {
-                fs.unlinkSync(realPath);
-            }
-        });
+                if (fs.lstatSync(realPath).isDirectory()) {
+                    rm(realPath);
+                } else {
+                    fs.unlinkSync(realPath);
+                }
+            });
 
-        fs.rmdirSync(path);
+            fs.rmdirSync(path);
+        } else {
+            fs.unlinkSync(path);
+        }
     }
 }
 
 rm('./.git');
-fs.unlinkSync('./package.json');
-fs.unlinkSync('./package-lock.json');
-fs.unlinkSync('./README.md');
-fs.unlinkSync('./LICENSE');
+rm('./package.json');
+rm('./package-lock.json');
+rm('./README.md');
+rm('./LICENSE');
 
 fs.writeFileSync('./README.md', '# your_library\n Here goes your library description!\n\0', 'utf8');
 
 childProcess.spawnSync('git', ['init'], { stdio: 'inherit' });
+process.stdout.write('\n');
 childProcess.spawnSync('npm', ['init'], { stdio: 'inherit' });
+process.stdout.write('\n');
 childProcess.spawnSync('npm', (['install'].concat(devDependencies).concat['--save-dev']), { stdio: 'inherit' });
