@@ -33,6 +33,7 @@ function checkForBackup() {
     const hasBackup = existsSync(bkpPath);
 
     if (hasBackup) {
+        spinner.succeed();
         return helpers.readFile(bkpPath, 'json', spinner);
     }
 
@@ -131,11 +132,11 @@ function done() {
     // Patch Package.json scripts and dependencies
     patchFiles(templatePkg, userPkg);
 
-    // Make the first commit to clear git working tree
-    makeFirstCommit();
-
     // Remove the setup folder to prevent re-setuping
     removeSetupFiles();
+
+    // Make the first commit to clear git working tree
+    makeFirstCommit();
 
     // Done!
     done();
