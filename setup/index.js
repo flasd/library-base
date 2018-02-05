@@ -21,6 +21,7 @@ function doBackup() {
     const pkg = helpers.readFile(pkgPath, 'string', spinner);
     helpers.writeFile(bkpPath, pkg, spinner);
 
+    spinner.succeed();
     return JSON.parse(pkg);
 }
 
