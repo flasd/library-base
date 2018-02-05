@@ -22,9 +22,9 @@ function doBackup() {
     const spinner = helpers.displaySpinner('Backing up package.json just in case.');
     const pkg = helpers.readFile(pkgPath, 'string', spinner);
     helpers.writeFile(bkpPath, pkg, spinner);
-    sleep(800);
+    sleep(1000);
 
-    spinner.succeed();
+    spinner.succeed('Successfully done safety backup.');
     return JSON.parse(pkg);
 }
 
@@ -35,6 +35,8 @@ function doBackup() {
 function checkForBackup() {
     const spinner = helpers.displaySpinner('Hello! Starting setup now!');
     const hasBackup = existsSync(bkpPath);
+
+    sleep(1400);
 
     if (hasBackup) {
         spinner.succeed();
@@ -60,15 +62,17 @@ function removeRepositoryFiles() {
     ];
 
     helpers.spawn('rimraf', files, {}, spinner);
-    sleep(1000);
-    spinner.succeed();
+    sleep(700);
+    spinner.succeed('No more junk files');
 }
 
 function initializeGit() {
     const spinner = helpers.displaySpinner('Initializing a new Git repository just for you.');
 
     helpers.spawn('git', ['init'], {}, spinner);
-    spinner.succeed();
+    
+    sleep(850);
+    spinner.succeed('Successfully initlized new git repo!');
 }
 
 function initializeNPM() {
@@ -80,7 +84,7 @@ function initializeNPM() {
     const userPkg = helpers.readFile(pkgPath, 'json', spinner);
 
     clear();
-    spinner.succeed();
+    spinner.succeed('Successfully initialized new package.json');
     return userPkg;
 }
 
@@ -97,7 +101,7 @@ function patchFiles(templatePkg, userPkg) {
 
     helpers.writeFile(READMEPath, finalReadme, spinner);
     sleep(900);
-    spinner.succeed();
+    spinner.succeed('Be aware of diabetes..');
 }
 
 function makeFirstCommit() {
@@ -107,7 +111,7 @@ function makeFirstCommit() {
     helpers.spawn('git', ['commit', '-m', '"This is where it all started."'], {}, spinner);
 
     sleep(500);
-    spinner.succeed();
+    spinner.succeed('Commited');
 }
 
 function removeSetupFiles() {
@@ -116,7 +120,7 @@ function removeSetupFiles() {
     helpers.spawn('rimraf', ['./setup/'], {}, spinner);
 
     sleep(600);
-    spinner.succeed();
+    spinner.succeed('No more accidental re-setups.');
 }
 
 function done() {
@@ -128,6 +132,8 @@ function done() {
 (() => {
     // Clears terminal/cmd window
     clear();
+
+    console.log('\n\n');
 
     // Create a package.json backup
     const templatePkg = checkForBackup();
