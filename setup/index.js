@@ -1,4 +1,6 @@
+const clear = require('clear-console');
 const deepMerge = require('deepmerge');
+const sleep = require('sleep-sync');
 const { existsSync } = require('fs');
 
 const helpers = require('./helpers');
@@ -20,6 +22,7 @@ function doBackup() {
     const spinner = helpers.displaySpinner('Backing up package.json just in case.');
     const pkg = helpers.readFile(pkgPath, 'string', spinner);
     helpers.writeFile(bkpPath, pkg, spinner);
+    sleep(800);
 
     spinner.succeed();
     return JSON.parse(pkg);
@@ -57,7 +60,7 @@ function removeRepositoryFiles() {
     ];
 
     helpers.spawn('rimraf', files, {}, spinner);
-
+    sleep(1000);
     spinner.succeed();
 }
 
@@ -70,16 +73,19 @@ function initializeGit() {
 
 function initializeNPM() {
     const spinner = helpers.displaySpinner('Initializing a new package.json.');
+    console.log('\n\n');
+    sleep(800);
 
     helpers.spawn('npm', ['init'], { detached: true, stdio: 'inherit' }, spinner);
     const userPkg = helpers.readFile(pkgPath, 'json', spinner);
 
+    clear();
     spinner.succeed();
     return userPkg;
 }
 
 function patchFiles(templatePkg, userPkg) {
-    const spinner = helpers.displaySpinner('Preparing coffee.');
+    const spinner = helpers.displaySpinner('Adding sugar.');
 
     const finalPkg = deepMerge(templatePkg, userPkg);
     helpers.writeFile(pkgPath, JSON.stringify(finalPkg, null, 4), spinner);
@@ -90,7 +96,7 @@ function patchFiles(templatePkg, userPkg) {
         .replace(/\[date\]/g, new Date().getFullYear().toString(10));
 
     helpers.writeFile(READMEPath, finalReadme, spinner);
-
+    sleep(900);
     spinner.succeed();
 }
 
@@ -100,6 +106,7 @@ function makeFirstCommit() {
     helpers.spawn('git', ['add', '.'], {}, spinner);
     helpers.spawn('git', ['commit', '-m', '"This is where it all started."'], {}, spinner);
 
+    sleep(500);
     spinner.succeed();
 }
 
@@ -108,6 +115,7 @@ function removeSetupFiles() {
 
     helpers.spawn('rimraf', ['./setup/'], {}, spinner);
 
+    sleep(600);
     spinner.succeed();
 }
 
@@ -118,6 +126,9 @@ function done() {
 // //////////////////////////////
 
 (() => {
+    // Clears terminal/cmd window
+    clear();
+
     // Create a package.json backup
     const templatePkg = checkForBackup();
 
