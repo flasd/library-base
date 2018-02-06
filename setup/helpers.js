@@ -1,6 +1,5 @@
 const { spawnSync } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
-const ora = require('ora');
 const path = require('path');
 const prettyError = new (require('pretty-error'))();
 
@@ -25,15 +24,6 @@ exports.terminate = function terminate(error, spinner) {
     prettyError.render(error);
     return process.exit(1);
 };
-
-/**
- *
- * @param {string} message Message to be display together with the spinner
- */
-exports.displaySpinner = function displaySpinner(message) {
-    return ora({ spinner: 'dots10', text: message }).start();
-};
-
 
 /**
  *
