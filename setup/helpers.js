@@ -46,7 +46,7 @@ exports.readFile = function readFile(filePath, encoding, spinner) {
         const fileBuffer = readFileSync(filePath);
 
         if (encoding && encoding === 'json') {
-            return fileBuffer.toJSON();
+            return JSON.parse(fileBuffer.toString());
         }
 
         return fileBuffer.toString();
