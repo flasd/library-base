@@ -10,14 +10,14 @@ Webpack base for developing libraries
 
 ### Setup
 
-First, obviously,
+First, if you didn't already,
 ```
 $ git clone https://github.com/flasd/library-base myLibrary
 ```
 
 Then, `cd` into `myLibrary` and run
 ```
-$ node setup
+$ npm run setup
 ```
 Setup will:
 - Remove .git folder and initialize a new local repository for you;
